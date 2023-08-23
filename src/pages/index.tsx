@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { LoadingPage } from "~/components/loading";
 dayjs.extend(relativeTime);
 
 const CreatePostWizard = () => {
@@ -31,7 +32,7 @@ const CreatePostWizard = () => {
 };
 
 // number: because posts/getall is an array, we use number to tell TS that we want an element of the array
-type PostWithUser = RouterOutputs["posts"]["getAll"][number];
+type PostWithUser = RouterOutputs["posts"]["getAll"][number]
 const PostView = (props: PostWithUser) => {
   const { post, author } = props;
   return (
@@ -63,7 +64,7 @@ export default function Home() {
   const { data, isLoading } = api.posts.getAll.useQuery();
 
   if (isLoading)
-    return <div className="flex w-full justify-center">Loading...</div>;
+    return <LoadingPage/>
   if (!data)
     return (
       <div className="flex w-full justify-center">Something went wrong</div>
